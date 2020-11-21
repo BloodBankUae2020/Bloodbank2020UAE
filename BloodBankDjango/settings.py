@@ -122,4 +122,4 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join('/Users/Sandhanakrishnan/BBM_G/Bloodbank2020UAE', 'static'),
 )
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
