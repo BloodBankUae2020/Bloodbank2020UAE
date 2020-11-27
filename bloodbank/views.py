@@ -122,8 +122,8 @@ def view_queries(request,pid):
 def delete_queries(request,pid):
     if not request.user.is_authenticated:
         return redirect('login')
-    group = Group.objects.get(id=pid)
-    group.delete()
+    contact = Contact.objects.get(id=pid)
+    contact.delete()
     return redirect('delete_queries')
 
 
