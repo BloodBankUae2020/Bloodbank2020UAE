@@ -119,6 +119,13 @@ def view_queries(request,pid):
     d = {'contact':contact}
     return render(request, 'view_queries.html', d)
 
+def delete_queries(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    group = Group.objects.get(id=pid)
+    group.delete()
+    return redirect('delete_queries')
+
 
 def add_bloodgroup(request):
     if not request.user.is_authenticated:

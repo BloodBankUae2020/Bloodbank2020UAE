@@ -57,7 +57,7 @@
                                         <td class="font-w600">
                                             <span class="badge badge-primary">{{i.mdate}}</span>
                                         </td>
-
+                                         <td class="d-none d-sm-table-cell"><a href="{% url 'delete_queries' i.id %}" onclick="return confirm('Do you really want to Delete ?');"><i class="fa fa-trash fa-delete" aria-hidden="true"></i></a></td>
                                          <td class="d-none d-sm-table-cell"><a href="{% url 'view_queries' i.id %}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
                                     </tr>
 
