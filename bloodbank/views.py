@@ -29,6 +29,7 @@ def contact(request):
     d = {'error': error}
     return render(request, 'contact.html',d)
 
+
 def adminlogin(request):
     error = ""
     if request.method == 'POST':
@@ -118,13 +119,6 @@ def view_queries(request,pid):
     contact.save()
     d = {'contact':contact}
     return render(request, 'view_queries.html', d)
-
-def delete_queries(request,pid):
-    if not request.user.is_authenticated:
-        return redirect('login')
-    contact = Contact.objects.get(id=pid)
-    contact.delete()
-    return redirect('delete_queries')
 
 
 def add_bloodgroup(request):

@@ -15,9 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+
+
 from bloodbank.views import *
+
 from django.conf import settings
 from django.conf.urls.static import static
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -41,7 +46,7 @@ urlpatterns = [
     path('view_donordetail/<int:pid>',view_donordetail, name="view_donordetail"),
     path('user_search', user_search, name="user_search"),
     path('booking_search', booking_search, name="booking_search"),
-path('blood_search', blood_search, name="blood_search"),
+    path('blood_search', blood_search, name="blood_search"),
     path('bookingbtwdates',bookingbtwdates, name="bookingbtwdates"),
     path('betweendate_report',betweendate_report, name="betweendate_report"),
 
