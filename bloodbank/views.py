@@ -293,7 +293,7 @@ def blood_search(request):
     if request.method == "POST":
         if 'searchblood' in request.POST:
          sd = request.POST['searchblood']
-         check=request.POST.get
+         # check=request.POST.get
          try:
             if sd=="A+":
                 bg=1
