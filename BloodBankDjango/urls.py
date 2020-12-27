@@ -16,8 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-
 from bloodbank.views import *
+
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -40,10 +40,14 @@ urlpatterns = [
     path('view_bloodgroup',view_bloodgroup, name='view_bloodgroup'),
     path('delete_bloodgroup(?P<int:pid>)',delete_bloodgroup,name='delete_bloodgroup'),
     path('add_donor', add_donor, name='add_donor'),
+    path('add_hospital',add_hospital, name='add_hospital'),
     path('becomedonor', becomedonor, name='becomedonor'),
     path('donorlist',donorlist, name='donorlist'),
+    path('hospitallist',hospitallist, name='hospitallist'),
     path('delete_donor(?P<int:pid>)',delete_donor,name='delete_donor'),
+    path('delete_hospital(?P<int:pid>)',delete_hospital,name='delete_hospital'),
     path('view_donordetail/<int:pid>',view_donordetail, name="view_donordetail"),
+    path('view_hospitaldetail/<int:pid>', view_hospitaldetail, name="view_hospitaldetail"),
     path('user_search', user_search, name="user_search"),
     path('booking_search', booking_search, name="booking_search"),
     path('blood_search', blood_search, name="blood_search"),

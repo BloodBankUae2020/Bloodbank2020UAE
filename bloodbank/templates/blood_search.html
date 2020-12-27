@@ -41,7 +41,7 @@
 	 <div class="container">
 		 <ol class="breadcrumb">
 		  <li><a href="{% url 'home' %}">Home</a></li>
-		  <li class="active">Search Donor</li>
+		  <li class="active">Search Bloodbank or BloodGroup</li>
 		 </ol>
 
          <!-- Main Container -->
@@ -54,15 +54,15 @@
                     <!-- Dynamic Table Full Pagination -->
                     <div class="block">
                         <div class="block-header block-header-default">
-                            <h3 class="block-title">Search Donor</h3>
+                            <h3 class="block-title">Search Hospital/Bloodbank</h3>
                         </div>
                         <div class="block-content block-content-full">
                             <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality initialized in js/pages/be_tables_datatables.js -->
                             <form id="basic-form" method="post">
                                    {% csrf_token %}
                                 <div class="form-group">
-                                    <label>Search by Blood Group/Location</label>
-                                    <input id="searchdata" type="text" name="searchblood" required="true" class="form-control" placeholder="Blood Group/Location"></div>
+                                    <label>Search by Hospital or BloodBank/Location</label>
+                                    <input id="searchdata" type="text" name="searchblood" required="true" class="form-control" placeholder="Blood Bank/Hospital/Location"></div>
 
                                 <br>
                                 <button type="submit" class="btn btn-primary" name="search" id="submit">Search</button>
@@ -73,6 +73,83 @@
                                 <thead>
                                      <tr>
                                         <th class="text-center"></th>
+                                        <th>S.NO</th>
+                                        <th class="d-none d-sm-table-cell">Hospital Name</th>
+                                        <th class="d-none d-sm-table-cell">Contact Number</th>
+<!--                                        <th class="d-none d-sm-table-cell">Email</th>-->
+<!--                                        <th class="d-none d-sm-table-cell">Blood Group</th>-->
+                                         <th class="d-none d-sm-table-cell">Location</th>
+                                         <th class="d-none d-sm-table-cell">A+</th>
+                                          <th class="d-none d-sm-table-cell">A-</th>
+                                          <th class="d-none d-sm-table-cell">B+</th>
+                                          <th class="d-none d-sm-table-cell">B-</th>
+                                          <th class="d-none d-sm-table-cell">AB+</th>
+                                          <th class="d-none d-sm-table-cell">AB-</th>
+                                          <th class="d-none d-sm-table-cell">O+</th>
+                                          <th class="d-none d-sm-table-cell">O-</th>
+
+
+<!--                                        <th class="d-none d-sm-table-cell">Posting Date</th>-->
+
+                                       </tr>
+                                </thead>
+                                <tbody>
+                                   {% for i in hospital %}
+                                    <tr>
+                                        <td class="text-center">{{forloop.counter}}</td>
+                                        <td class="font-w600">{{i.id}}</td>
+                                        <td class="font-w600">{{i.HospitalName}}</td>
+                                        <td class="font-w600">{{i.ContactNo}}</td>
+                                        <td class="font-w600">{{i.Location}}</td>
+                                         <td class="font-w600">{{i.Aplus}}</td>
+                                         <td class="font-w600">{{i.Aminus}}</td>
+                                         <td class="font-w600">{{i.Bplus}}</td>
+                                         <td class="font-w600">{{i.Bminus}}</td>
+                                         <td class="font-w600">{{i.ABplus}}</td>
+                                         <td class="font-w600">{{i.ABminus}}</td>
+                                         <td class="font-w600">{{i.Oplus}}</td>
+                                         <td class="font-w600">{{i.Ominus}}</td>
+
+<!--                                        <td class="font-w600">{{i.group.bloodgroup}}</td>-->
+<!--                                         <td class="font-w600">{{i.address}}</td>-->
+<!--                                        <td class="font-w600">-->
+<!--                                            <span class="badge badge-primary">{{i.postingdate}}</span>-->
+<!--                                        </td>-->
+
+                                    </tr>
+{% endfor %}
+                                </tbody>
+{% else %}
+  <tr>
+    <td colspan="8"> No record found against this search</td>
+
+  </tr>
+  {% endifequal %}
+                            </table>
+                        </div>
+                    </div>
+                    <!-- END Dynamic Table Full Pagination -->
+             <div class="block">
+                        <div class="block-header block-header-default">
+                            <h3 class="block-title">Search Blood Group</h3>
+                        </div>
+                        <div class="block-content block-content-full">
+                            <!-- DataTables init on table by adding .js-dataTable-full-pagination class, functionality initialized in js/pages/be_tables_datatables.js -->
+                            <form id="basic-form1" method="post">
+                                   {% csrf_token %}
+                                <div class="form-group">
+                                    <label>Search Blood Group</label>
+                                    <input id="searchdata1" type="text" name="searchgroup" required="true" class="form-control" placeholder="Type Blood Group"></div>
+
+                                <br>
+                                <button type="submit" class="btn btn-primary" name="search1" id="submit1">Search Blood Groups</button>
+                            </form>
+                            {% ifequal terror "found" %}
+  <h4 align="center">Result against "{{ sd }}" keyword </h4>
+                            <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
+                                <thead>
+                                     <tr>
+                                             <th class="text-center"></th>
                                         <th>Donor ID</th>
                                         <th class="d-none d-sm-table-cell">Full Name</th>
                                         <th class="d-none d-sm-table-cell">Mobile Number</th>
@@ -95,18 +172,14 @@
                                          <td class="font-w600">{{i.address}}</td>
                                         <td class="font-w600">
                                             <span class="badge badge-primary">{{i.postingdate}}</span>
-                                        </td>
-
-
-
-
-
+                                        </td>    <td class="font-w600">{{i.group.bloodgroup}}</td>-->
+<!--                                         <td class="font-w600">{{i.address}}</td>-->
+<!--                                        <td class="font-w600">-->
+<!--                                            <span class="badge badge-primary">{{i.postingdate}}</span>-->
+<!--                                        </td>-->
 
                                     </tr>
 {% endfor %}
-
-
-
                                 </tbody>
 {% else %}
   <tr>
@@ -117,16 +190,11 @@
                             </table>
                         </div>
                     </div>
-                    <!-- END Dynamic Table Full Pagination -->
-
                     <!-- END Dynamic Table Simple -->
                 </div>
                 <!-- END Page Content -->
             </main>
             <!-- END Main Container -->
-
-
-
 
 
 		{% include 'footer.html' %}
@@ -137,17 +205,17 @@
 <!---->
 </body>
 </html>
-{%  ifequal error "no" %}
-<script>
-    alert('Record Saved Successfully');
-</script>
-{%  endifequal %}
+<!--{%  ifequal error "no" %}-->
+<!--&lt;!&ndash;<script>&ndash;&gt;-->
+<!--&lt;!&ndash;    alert('Record Saved Successfully');&ndash;&gt;-->
+<!--&lt;!&ndash;</script>&ndash;&gt;-->
+<!--{%  endifequal %}-->
 
-{%  ifequal error "yes" %}
-<script>
-    alert('Something went wrong , Try Again');
-</script>
-{%  endifequal %}
+<!--{%  ifequal error "yes" %}-->
+<!--<script>-->
+<!--    alert('Something went wrong , Try Again');-->
+<!--</script>-->
+<!--{%  endifequal %}-->
 
 
 

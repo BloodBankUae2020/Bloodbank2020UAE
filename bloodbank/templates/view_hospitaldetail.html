@@ -1,0 +1,139 @@
+{% load static %}
+{% block body %}
+ <html lang="en" class="no-focus"> <!--<![endif]-->
+    <head>
+ <title>Blood Bank Management System</title>
+
+<link rel="stylesheet" href="{% static 'adminassets/js/plugins/datatables/dataTables.bootstrap4.min.css' %}">
+
+        <link rel="stylesheet"  href="{% static 'adminassets/css/codebase.min.css' %}">
+</head>
+    <body>
+        <div id="page-container" class="sidebar-o sidebar-inverse side-scroll page-header-fixed main-content-narrow">
+
+
+
+ {% include 'sidebar.html' %}
+            {% include 'admin_nav.html' %}
+
+            <!-- Main Container -->
+            <main id="main-container">
+                <!-- Page Content -->
+                <div class="content">
+
+                    <!-- Register Forms -->
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Bootstrap Register -->
+                            <div class="block block-themed">
+                                <div class="block-header bg-gd-emerald">
+                                    <h3 class="block-title">View Hospital/Bloodbank Detail</h3>
+                                    <div class="block-options">
+                                        <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                                            <i class="si si-refresh"></i>
+                                        </button>
+                                        <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+                                    </div>
+                                </div>
+                                <div class="block-content">
+
+                                    {% for i in hospital %}
+                                        <table border="1" class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
+                                            <tr>
+                                                <th>Hospital/Bloodbank Name</th>
+                                                 <td>{{i.HospitalName}}</td>
+                                            </tr>
+
+
+     <tr>
+       <th>Contact Number</th>
+    <td>{{i.ContactNo}}</td>
+      </tr>
+
+                                            <tr>
+   <th>Location</th>
+    <td>{{i.Location}}</td>
+  </tr>
+
+                                <th>Blood Groups and Count</th>
+  <tr>
+    <th>A+</th>
+    <td>{{i.Aplus}}</td>
+      </tr>
+
+        <tr>
+      <th>A-</th>
+      <td>{{i.Aminus}}</td>
+        </tr>
+                                            <tr>
+      <th>B+</th>
+    <td>{{i.Bplus}}</td>
+                                                </tr>
+                                            <tr>
+      <th>B-</th>
+    <td>{{i.Bminus}}</td>
+                                            </tr>
+                                            <tr>
+      <th>AB+</th>
+    <td>{{i.ABplus}}</td>
+                                            </tr>
+                                            <tr>
+      <th>AB-</th>
+    <td>{{i.ABplus}}</td>
+                                                </tr>
+                                            <tr>
+      <th>O+</th>
+    <td>{{i.Oplus}}</td>
+                                                </tr>
+                                            <tr>
+      <th>O-</th>
+    <td>{{i.Ominus}}</td>
+
+  </tr>
+
+
+
+
+
+
+
+
+</table>
+
+ {% endfor %}
+
+</div>
+
+
+
+
+
+
+                                </div>
+                            </div>
+                            <!-- END Bootstrap Register -->
+            </main>
+            <!-- END Main Container -->
+
+         {% include 'adminfooter.html' %}
+        </div>
+        <!-- END Page Container -->
+
+        <!-- Codebase Core JS -->
+         <script src="{% static 'adminassets/js/core/jquery.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/core/popper.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/core/bootstrap.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/core/jquery.slimscroll.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/core/jquery.scrollLock.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/core/jquery.appear.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/core/jquery.countTo.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/core/js.cookie.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/codebase.js' %}"></script>
+    </body>
+</html>
+
+
+
+
+{% endblock %}

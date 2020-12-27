@@ -5,4 +5,5 @@ from .models import *
 admin.site.register(Group)
 admin.site.register(Contact)
 admin.site.register(Donor)
+admin.site.register(Hospital)
 

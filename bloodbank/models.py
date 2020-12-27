@@ -1,11 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
+
+
 # Create your models here.
 
 class Group(models.Model):
     bloodgroup = models.CharField(max_length=30)
+
     def __str__(self):
         return self.bloodgroup
+
 
 class Donor(models.Model):
     fullname = models.CharField(max_length=100)
@@ -17,8 +21,29 @@ class Donor(models.Model):
     address = models.CharField(max_length=300, null=True)
     message = models.CharField(max_length=300, null=True)
     postingdate = models.DateField()
+
     def __str__(self):
-        return self.fullname+" "+self.group.bloodgroup
+        return self.fullname + " " + self.group.bloodgroup
+
+
+class Hospital(models.Model):
+
+    HospitalName = models.CharField(max_length=100)
+    ContactNo = models.CharField(max_length=15)
+    Location = models.CharField(max_length=300, null=True)
+    Aplus= models.CharField(max_length=10)
+    Aminus = models.CharField(max_length=10)
+    Bplus = models.CharField(max_length=10)
+    Bminus = models.CharField(max_length=10)
+    ABplus = models.CharField(max_length=10)
+    ABminus = models.CharField(max_length=10)
+    Oplus= models.CharField(max_length=10)
+    Ominus = models.CharField(max_length=10)
+
+
+
+    def __str__(self):
+        return self.HospitalName + " " + self.Location
 
 
 class Contact(models.Model):
@@ -28,5 +53,6 @@ class Contact(models.Model):
     message = models.CharField(max_length=300)
     mdate = models.DateField()
     isread = models.CharField(max_length=10)
+
     def __str__(self):
         return self.name
