@@ -25,7 +25,7 @@ SECRET_KEY = '4)87f_0=n4srv@tf-k0zp&1r@=r2wexzs@%@e=!ule*3a8o4#t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['donateblooduae.herokuapp.com','127.0.0.1' ]
+ALLOWED_HOSTS = ['donatebloodksa.herokuapp.com','127.0.0.1' ]
 
 
 # Application definition
