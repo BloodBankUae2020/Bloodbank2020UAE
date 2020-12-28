@@ -251,6 +251,45 @@ def delete_hospital(request, pid):
     hospital.delete()
     return redirect('hospitallist')
 
+def edit_hospital(request, pid):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    hospital = Hospital.objects.filter(id=pid)
+    error = ""
+
+    if request.method == "POST":
+        form = HospitalForm(request.POST)
+        # if form.is_valid():
+        #     form.save()
+
+        # context = {'form': form}
+        hn = request.POST['HospitalName']
+        cn = request.POST['ContactNo']
+        lc = request.POST['Location']
+        Ap = request.POST['Aplus']
+        Am = request.POST['Aminus']
+        Bp = request.POST['Bplus']
+        Bm = request.POST['Bminus']
+        ABp = request.POST['ABplus']
+        ABm = request.POST['ABminus']
+        Op = request.POST['Oplus']
+        Om = request.POST['Ominus']
+        # group11 = Group.objects.get(bloodgroup=BG)
+
+        try:
+
+            Hospital.objects.create(HospitalName=hn, ContactNo=cn,
+                                    Location=lc, Aplus=Ap, Aminus=Am, Bplus=Bp, Bminus=Bm, ABplus=ABp, ABminus=ABm,
+                                    Oplus=Op, Ominus=Om)
+            error = "no"
+            hospital.delete()
+        except:
+            error = "yes"
+    d = {'hospital': hospital,'error': error}
+
+
+    return render(request, 'edit_hospital.html', d)
+
 
 
 def view_donordetail(request, pid):

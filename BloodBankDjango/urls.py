@@ -48,6 +48,7 @@ urlpatterns = [
     path('delete_hospital(?P<int:pid>)',delete_hospital,name='delete_hospital'),
     path('view_donordetail/<int:pid>',view_donordetail, name="view_donordetail"),
     path('view_hospitaldetail/<int:pid>', view_hospitaldetail, name="view_hospitaldetail"),
+    path('edit_hospital/<int:pid>',edit_hospital, name="edit_hospital"),
     path('user_search', user_search, name="user_search"),
     path('booking_search', booking_search, name="booking_search"),
     path('blood_search', blood_search, name="blood_search"),

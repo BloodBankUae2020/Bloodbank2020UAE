@@ -55,6 +55,7 @@
                                         <td class="font-w600">{{i.Location}}</td>
                                          <td class="d-none d-sm-table-cell"><a href="{% url 'delete_hospital' i.id %}" onclick="return confirm('Do you really want to Delete ?');"><i class="fa fa-trash fa-delete" aria-hidden="true"></i></a></td>
                                          <td class="d-none d-sm-table-cell"><a href="{% url 'view_hospitaldetail' i.id %}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                         <td class="d-none d-sm-table-cell"><a href="{% url 'edit_hospital' i.id %}"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i></a></td>
                                     </tr>
 
                                     {% endfor %}
