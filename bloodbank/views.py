@@ -315,8 +315,9 @@ def blood_search(request):
                 bg=0
 
             # hospital = Hospital.objects.filter((Q(HospitalName=sd) | Q(Location=sd) | Q(id=sd)))
-            idd = Hospital.objects.filter(Location=sd).values_list('id', flat=True).first()
-            hospital = Hospital.objects.filter(Q(id=idd))
+            idd = Hospital.objects.filter(Location=sd).values_list('Location', flat=True).first()
+            idd1 = Hospital.objects.filter(HospitalName=sd).values_list('HospitalName', flat=True).first()
+            hospital = Hospital.objects.filter(Q(Location=idd) | Q(HospitalName=idd1))
             terror = "found"
 
          except:
@@ -327,7 +328,8 @@ def blood_search(request):
 
                 # hospital = Hospital.objects.filter((Q(HospitalName=sd) | Q(Location=sd) | Q(id=sd)))
                 group = Group.objects.get(bloodgroup=sd)
-                donor = Donor.objects.filter(Q(group=group) | Q(address=sd))
+                donor = Donor.objects.filter(Q(group=group))
+
                 terror = "found"
 
             except:
