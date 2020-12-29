@@ -1,0 +1,134 @@
+
+        {% load static %}
+{% block body %}
+        <html lang="en" class="no-focus"> <!--<![endif]-->
+    <head>
+        <title>Blood Bank Management System - Blood Count and Analytics</title>
+       <link rel="stylesheet" href="{% static 'adminassets/js/plugins/datatables/dataTables.bootstrap4.min.css' %}">
+
+        <link rel="stylesheet" id="css-main" href="{% static 'adminassets/css/codebase.min.css' %}">
+
+    </head>
+
+        <div id="page-container" class="sidebar-o sidebar-inverse side-scroll page-header-fixed main-content-narrow">
+
+            {% include 'sidebar.html' %}
+            {% include 'admin_nav.html' %}
+
+            <!-- Main Container -->
+            <main id="main-container">
+                <!-- Page Content -->
+                <div class="content">
+                    <h2 class="content-heading">Select Hospital</h2>
+                      <form method="post">
+                        {% csrf_token %}
+                    <select name="viewstats" id="viewstats" required="true">
+<!--                    <option disabled="true" selected><&#45;&#45;Select Hospital/Blood Bank&ndash;&gt;</option>-->
+							 	{% for i in results %}
+                                 <option value="{{i.HospitalName}}">{{i.HospitalName}}</option>
+                                {% endfor %}
+                    </select>
+
+                     <button name="viewS" value="ViewS" id="viewS" >View</button>
+                                          <div class="col-12">
+                                                 <th>{{names}}</th>
+                                            </div>
+                    </form>
+
+
+<!--                  {% for i in names %}-->
+<!--                         {{i.HospitalName}}-->
+<!--                         {% endfor %}-->
+
+
+            <!--          <div id="container" style="width: 75%;">-->
+            <canvas id="pie-chart"></canvas>
+            <!--  </div>-->
+            <div>
+                <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+                <script>
+
+    var config = {
+      type: 'bar',
+      data: {
+        datasets: [{
+          data: {{ data|safe }},
+          backgroundColor: [
+            '#DE3163', '#DFFF00', '#FFBF00', '#CCCCFF', '#40E0D0', '#6495ED', '#FF7F50', '#9FE2BF'
+          ],
+
+
+            label: 'Blood Count'
+
+
+        }],
+        labels: {{ labels|safe }}
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('pie-chart').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+
+  </script>
+
+            </div>
+                </div>
+                 <div class="block-content">
+                            <h2 class="content-heading">Stock Info</h2>
+
+                            <table border="1" class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
+
+                                    <tr>
+                                        <th>A+ </th>
+                                        <td>{{stocks.0}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>A-</th>
+                                         <td>{{stocks.1}}</td>
+                                    </tr>
+                                  <tr>
+                                        <th >B+</th>
+                                         <td>{{stocks.2}}</td>
+                                    </tr>
+                                  <tr>
+                                        <th>B-</th>
+                                         <td>{{stocks.3}}</td>
+                                    </tr>
+                                  <tr>
+                                        <th>AB+</th>
+                                         <td>{{stocks.4}}</td>
+                                    </tr>
+                                  <tr>
+                                        <th>AB-</th>
+                                         <td>{{stocks.5}}</td>
+                                    </tr>
+                                   <tr>
+                                        <th>O+</th>
+                                         <td>{{stocks.6}}</td>
+                                    </tr>
+                                   <tr>
+                                         <th>O-</th>
+                                         <td>{{stocks.7}}</td>
+                                    </tr>
+
+                            </table>
+
+         </div>
+
+            </main>
+        </div>
+
+
+
+
+
+        </body>
+        </html>
+
+            {% endblock %}

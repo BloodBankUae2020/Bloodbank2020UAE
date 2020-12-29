@@ -44,6 +44,7 @@ urlpatterns = [
     path('becomedonor', becomedonor, name='becomedonor'),
     path('donorlist',donorlist, name='donorlist'),
     path('hospitallist',hospitallist, name='hospitallist'),
+    path('graphData',graphData,name='graphData'),
     path('delete_donor(?P<int:pid>)',delete_donor,name='delete_donor'),
     path('delete_hospital(?P<int:pid>)',delete_hospital,name='delete_hospital'),
     path('view_donordetail/<int:pid>',view_donordetail, name="view_donordetail"),

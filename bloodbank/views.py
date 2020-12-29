@@ -236,6 +236,60 @@ def hospitallist(request):
     d = {'hospital': hospital}
     return render(request, 'hospitallist.html', d)
 
+def graphData(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    hname=['Select Hospital']
+    labels = ['A+','A-','B+','B-','AB+','AB-','O+','O-']
+    stockinfo=['In Stock','In Stock','In Stock','In Stock','In Stock','In Stock','In Stock','In Stock']
+    data = []
+    data_int = []
+    # queryset = Hospital.objects.order_by('-Aplus')
+    results= Hospital.objects.all()
+    if request.method== "POST":
+       sd=request.POST['viewstats']
+       hname = Hospital.objects.filter(HospitalName=sd).values_list('HospitalName', flat=True).first()
+       Ap = Hospital.objects.filter(HospitalName=sd).values_list('Aplus', flat=True).first()
+       Am = Hospital.objects.filter(HospitalName=sd).values_list('Aminus', flat=True).first()
+       Bp = Hospital.objects.filter(HospitalName=sd).values_list('Bplus', flat=True).first()
+       Bm =Hospital.objects.filter(HospitalName=sd).values_list('Bminus', flat=True).first()
+       ABp = Hospital.objects.filter(HospitalName=sd).values_list('ABplus', flat=True).first()
+       ABm = Hospital.objects.filter(HospitalName=sd).values_list('ABminus', flat=True).first()
+       Op = Hospital.objects.filter(HospitalName=sd).values_list('Oplus', flat=True).first()
+       Om = Hospital.objects.filter(HospitalName=sd).values_list('Ominus', flat=True).first()
+       if 'viewS' in request.POST:
+             data.append(Ap)
+             data.append(Am)
+             data.append(Bp)
+             data.append(Bm)
+             data.append(ABp)
+             data.append(ABm)
+             data.append(Op)
+             data.append(Om)
+             for i in range(0, len(data)):
+                 data_int.append(int(data[i]))
+             res = []
+             for idx in range(0, len(data_int)):
+                 if data_int[idx] < 5 :
+                     if data_int[idx] > 0:
+                        res.append(idx)
+             for j in res:
+                 stockinfo[j]='Less Stock'
+             res=[]
+             for idx in range(0, len(data_int)):
+                     if data_int[idx] == 0:
+                         res.append(idx)
+             for j in res:
+                 stockinfo[j] = 'No stock'
+
+
+
+
+
+    return render(request, 'graphData.html', {
+        'labels': labels,
+        'data': data,'results': results, 'names': hname,'stocks':stockinfo,
+    })
 
 def delete_donor(request, pid):
     if not request.user.is_authenticated:
