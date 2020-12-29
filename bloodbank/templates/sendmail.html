@@ -1,0 +1,67 @@
+{% load static %}
+{% block body %}
+<html lang="en" class="no-focus"> <!--<![endif]-->
+    <head>
+        <title>Blood Bank Management System - Donor List</title>
+
+       <link rel="stylesheet" href="{% static 'adminassets/js/plugins/datatables/dataTables.bootstrap4.min.css' %}">
+
+        <link rel="stylesheet" id="css-main" href="{% static 'adminassets/css/codebase.min.css' %}">
+
+    </head>
+    <body>
+
+        <div id="page-container" class="sidebar-o sidebar-inverse side-scroll page-header-fixed main-content-narrow">
+
+          {% include 'sidebar.html' %}
+            {% include 'admin_nav.html' %}
+  <main id="main-container">
+                <!-- Page Content -->
+                <div class="content">
+                    <center>
+                        <h1 class = 'alert alert-success'>Donor Communication Service</h1></center>
+
+    <form method="post">
+                                    {% csrf_token %}
+                                        <div class="form-group row">
+                                            <label class="col-12" >Enter Email:</label>
+                                            <div class="col-12">
+                                                 <input type="email" class="form-control" name="Email" value="" required='true'>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-12" >Subject:</label>
+                                            <div class="col-12">
+                                                <input type="text" class="form-control" name="Subject" value="" required='true'>
+                                             </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-12" >Message:</label>
+                                            <div class="col-12">
+                                                <textarea class="form-control" name="Context" value="" required='true'></textarea>
+                                             </div>
+                                        </div>
+
+
+            <input type="submit" name="Subscribe" class = 'btn btn-primary btn-lg'>
+
+            </form>
+                </div>
+
+         </main>
+      </body>
+  </html>
+{%  ifequal error "no" %}
+<script>
+    alert('Mail Sent Successfully'} );
+    window.location=('{% url 'sendmail' %}');
+</script>
+{%  endifequal %}
+
+{%  ifequal error "yes" %}
+<script>
+    alert('Something went wrong ,Mail Not Sent');
+</script>
+{%  endifequal %}
+{% endblock %}

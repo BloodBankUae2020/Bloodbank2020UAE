@@ -21,6 +21,8 @@ class Donor(models.Model):
     address = models.CharField(max_length=300, null=True)
     message = models.CharField(max_length=300, null=True)
     postingdate = models.DateField()
+    Donationdate = models.DateField()
+    ExpiryDate= models.DateField()
 
     def __str__(self):
         return self.fullname + " " + self.group.bloodgroup
@@ -56,3 +58,11 @@ class Contact(models.Model):
 
     def __str__(self):
         return self.name
+
+class Subscribe(models.Model):
+    Email = models.EmailField()
+    Context=models.CharField(max_length=300)
+    Subject = models.CharField(max_length=100)
+
+    def _str_(self):
+        return self.Email

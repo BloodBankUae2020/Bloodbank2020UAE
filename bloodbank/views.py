@@ -6,7 +6,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import date
-from .forms import HospitalForm
+from .forms import forms
+from django.core.mail import send_mail
+from BloodBankDjango.settings import EMAIL_HOST_USER
 
 
 # Create your views here.
@@ -165,7 +167,7 @@ def add_hospital(request):
     error = ""
 
     if request.method == "POST":
-        form = HospitalForm(request.POST)
+
         # if form.is_valid():
         #     form.save()
 
@@ -517,3 +519,18 @@ def becomedonor(request):
             error = "yes"
     d = {'error': error, 'group': group}
     return render(request, 'becomedonor.html', d)
+
+def sendmail(request):
+    sub = Subscribe.objects.all()
+    error=""
+    if request.method == 'POST':
+        sub = request.POST['Subscribe']
+        subject = request.POST['Subject']
+        message = request.POST['Context']
+        recepients = request.POST['Email']
+        try:
+         send_mail(subject,message, EMAIL_HOST_USER, [recepients], fail_silently = False)
+         error = "no"
+        except:
+         error = "yes"
+    return render(request, 'sendmail.html',{'error':error} )

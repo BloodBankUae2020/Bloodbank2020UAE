@@ -1,8 +1,7 @@
-from django.forms import ModelForm
-from .models import Hospital
+from django import forms
+class Subscribe(forms.Form):
+    Email = forms.EmailField()
+    Context=forms.CharField(max_length=100)
 
-
-class HospitalForm(ModelForm):
-    class Meta:
-        model = Hospital
-        fields = '__all__'
+    def _str_(self):
+        return self.Email

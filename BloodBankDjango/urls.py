@@ -55,5 +55,6 @@ urlpatterns = [
     path('blood_search', blood_search, name="blood_search"),
     path('bookingbtwdates',bookingbtwdates, name="bookingbtwdates"),
     path('betweendate_report',betweendate_report, name="betweendate_report"),
+    path('sendmail',sendmail, name="sendmail"),
 
 ]
