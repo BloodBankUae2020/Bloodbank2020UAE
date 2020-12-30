@@ -24,6 +24,7 @@
                         {% csrf_token %}
                     <select name="viewstats" id="viewstats" required="true">
 <!--                    <option disabled="true" selected><&#45;&#45;Select Hospital/Blood Bank&ndash;&gt;</option>-->
+                        <option value="">-- Select Hospital/Blood Bank --</option>
 							 	{% for i in results %}
                                  <option value="{{i.HospitalName}}">{{i.HospitalName}}</option>
                                 {% endfor %}

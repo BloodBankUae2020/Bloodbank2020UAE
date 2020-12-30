@@ -21,10 +21,6 @@
             <main id="main-container">
                 <!-- Page Content -->
                 <div class="content">
-                    <h2 class="content-heading">Manage Donor List</h2>
-
-
-
                     <!-- Dynamic Table Full Pagination -->
                     <div class="block">
                         <div class="block-header block-header-default">
@@ -35,14 +31,16 @@
                             <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
                                 <thead>
                                     <tr>
-                                        <th class="text-center"></th>
-                                        <th>Donor ID</th>
+                                        <th>S.No</th>
                                         <th class="d-none d-sm-table-cell">Full Name</th>
                                         <th class="d-none d-sm-table-cell">Mobile Number</th>
-                                        <th class="d-none d-sm-table-cell">Email</th>
+<!--                                        <th class="d-none d-sm-table-cell">Email</th>-->
                                         <th class="d-none d-sm-table-cell">Blood Group</th>
-                                        <th class="d-none d-sm-table-cell">Posting Date</th>
-                                        <th class="d-none d-sm-table-cell" style="width: 15%;">Action</th>
+<!--                                        <th class="d-none d-sm-table-cell">Posting Date</th>-->
+                                         <th class="d-none d-sm-table-cell">Status</th>
+                                         <th class="d-none d-sm-table-cell">Donation Date</th>
+                                         <th class="d-none d-sm-table-cell">Expiry Date</th>
+                                        <th class="d-none d-sm-table-cell">Action</th>
                                        </tr>
                                 </thead>
                                 <tbody>
@@ -50,21 +48,20 @@
  {% for i in donor %}
 
                                     <tr>
-                                        <td class="text-center">{{forloop.counter}}</td>
-                                        <td class="font-w600">{{i.id}}</td>
-                                        <td class="font-w600">{{i.fullname}}</td>
-                                        <td class="font-w600">{{i.mobileno}}</td>
-                                        <td class="font-w600">{{i.emailid}}</td>
-                                        <td class="font-w600">{{i.group.bloodgroup}}</td>
-                                        <td class="font-w600">
-                                            <span class="badge badge-primary">{{i.postingdate}}</span>
-                                        </td>
-
-
-
+                                        <td>{{forloop.counter}}</td>
+                                        <td>{{i.fullname}}</td>
+                                        <td>{{i.mobileno}}</td>
+<!--                                        <td>{{i.emailid}}</td>-->
+                                        <td>{{i.group.bloodgroup}}</td>
+<!--                                        <td>-->
+<!--                                            <span class="badge badge-primary">{{i.postingdate}}</span>-->
+<!--                                        </td>-->
+                                        <td>{{i.Status}}</td>
+                                        <td>{{i.donation_date}}</td>
+                                        <td >{{i.expiry_date}}</td>
                                          <td class="d-none d-sm-table-cell"><a href="{% url 'delete_donor' i.id %}" onclick="return confirm('Do you really want to Delete ?');"><i class="fa fa-trash fa-delete" aria-hidden="true"></i></a></td>
-
-                                         <td class="d-none d-sm-table-cell"><a href="{% url 'view_donordetail' i.id %}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                        <td class="d-none d-sm-table-cell"><a href="{% url 'view_donordetail' i.id %}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                        <td class="d-none d-sm-table-cell"><a href="{% url 'edit_donor' i.id %}"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i></a></td>
                                     </tr>
 
                                     {% endfor %}

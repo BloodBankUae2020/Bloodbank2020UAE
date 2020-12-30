@@ -56,5 +56,6 @@ urlpatterns = [
     path('bookingbtwdates',bookingbtwdates, name="bookingbtwdates"),
     path('betweendate_report',betweendate_report, name="betweendate_report"),
     path('sendmail',sendmail, name="sendmail"),
+    path('edit_donor/<int:pid>',edit_donor, name="edit_donor"),
 
 ]

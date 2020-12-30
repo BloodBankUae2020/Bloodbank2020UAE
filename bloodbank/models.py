@@ -20,9 +20,12 @@ class Donor(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
     address = models.CharField(max_length=300, null=True)
     message = models.CharField(max_length=300, null=True)
-    postingdate = models.DateField()
-    Donationdate = models.DateField()
-    ExpiryDate= models.DateField()
+    postingdate = models.CharField(max_length=100)
+    Status = models.CharField(max_length=100)
+    donation_date = models.CharField(max_length=100)
+
+    expiry_date = models.CharField(max_length=100)
+
 
     def __str__(self):
         return self.fullname + " " + self.group.bloodgroup
@@ -66,3 +69,7 @@ class Subscribe(models.Model):
 
     def _str_(self):
         return self.Email
+
+
+
+

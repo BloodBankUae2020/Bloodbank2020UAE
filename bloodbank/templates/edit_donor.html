@@ -1,0 +1,193 @@
+{% load static %}
+
+{% block body %}
+ <html lang="en" class="no-focus"> <!--<![endif]-->
+    <head>
+ <title>Blood Bank Management - Edit Donor Status</title>
+<link rel="stylesheet" id="css-main" href="{% static 'adminassets/css/codebase.min.css' %}">
+
+</head>
+    <body>
+        <div id="page-container" class="sidebar-o sidebar-inverse side-scroll page-header-fixed main-content-narrow">
+
+
+              {% include 'sidebar.html' %}
+            {% include 'admin_nav.html' %}
+            <!-- Main Container -->
+            <main id="main-container">
+                <!-- Page Content -->
+                <div class="content">
+
+                    <!-- Register Forms -->
+
+                        <h2 class="content-heading">Update Donor Status</h2>
+                         <div class="row">
+                            <div class="col-md-12">
+                            <!-- Bootstrap Register -->
+                             <div class="block block-themed">
+                                <div class="block-header bg-gd-emerald">
+                                    <div class="block-options">
+                                        <button type="button" class="btn-block-option" data-toggle="block-option" data-action="state_toggle" data-action-mode="demo">
+                                            <i class="si si-refresh"></i>
+                                        </button>
+                                        <button type="button" class="btn-block-option" data-toggle="block-option" data-action="content_toggle"></button>
+                                    </div>
+                                </div>
+
+
+                                    <form method="post">
+                                       {% csrf_token %}
+
+                                     {% for i in donor %}
+
+                                        <div class="form-group row">
+                                            <label class="col-12" >Donor Name:</label>
+                                            <div class="col-12">
+                                                 <input type=text class="form-control" name="fullname"  value= "{{i.fullname}}" required='true'>
+
+                                            </div>
+                                        </div>
+                                          <div class="form-group row">
+                                            <label class="col-12" >Contact No:</label>
+                                            <div class="col-12">
+                                                 <input type=text class="form-control" name="mobileno"  value= "{{i.mobileno}}" required='true'>
+
+                                            </div>
+                                        </div>
+
+                                            <div class="form-group row">
+                                            <label class="col-12" >Email ID:</label>
+                                            <div class="col-12">
+                                                 <input type=text class="form-control" name="emailid"  value= "{{i.emailid}}" required='true'>
+
+                                            </div>
+                                        </div>
+
+                                            <div class="form-group row">
+                                            <label class="col-12" >Gender:</label>
+                                            <div class="col-12">
+                                                 <input type=text class="form-control" name="gender"  value= "{{i.gender}}" required='true'>
+
+                                            </div>
+                                        </div>
+
+                                            <div class="form-group row">
+                                            <label class="col-12" >Age:</label>
+                                            <div class="col-12">
+                                                 <input type=text class="form-control" name="age"  value= "{{i.age}}" required='true'>
+
+                                            </div>
+                                        </div>
+
+                                            <div class="form-group row">
+                                            <label class="col-12" >Blood Group:</label>
+                                            <div class="col-12">
+                                                 <input type=text class="form-control" name="group"  value= "{{i.group}}" required='true'>
+
+                                            </div>
+                                        </div>
+
+                                            <div class="form-group row">
+                                            <label class="col-12" >Address:</label>
+                                            <div class="col-12">
+                                                 <input type=text class="form-control" name="address"  value= "{{i.address}}" required='true'>
+
+                                            </div>
+                                        </div>
+
+                                               <div class="form-group row">
+                                            <label class="col-12" >Message:</label>
+                                            <div class="col-12">
+                                                 <input type=text class="form-control" name="message"  value= "{{i.message}}" required='true'>
+
+                                            </div>
+                                        </div>
+
+
+                                          <div class="form-group row">
+                                            <label class="col-12" >Resgistered Date:</label>
+                                            <div class="col-12">
+                                                 <input type=text class="form-control" name="postingdate"  value= "{{i.postingdate}}" required='true'>
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="form-group row">
+                                            <label class="col-12" >Status:</label>
+                                            <div class="col-12">
+                                                 <input type=text class="form-control" name="Status"  value= "" required='true'>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-12" >Donation Date:</label>
+                                            <div class="col-12">
+                                                 <input type="text" class="form-control" name="donation_date" value="" required='true'>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row">
+                                            <label class="col-12" >Expiry Date:</label>
+                                            <div class="col-12">
+                                                 <input type="text"  class="form-control" name="expiry_date"  value="" required='true'>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-12">
+                                                <button type="submit" class="btn btn-alt-success" name="submit">
+                                                    <i class="fa fa-plus mr-5"></i> Add
+                                                </button>
+                                            </div>
+                                         </div>
+
+                                    </form>
+                                    {% endfor %}
+
+
+<!--                                 {% for i in donorstat %}-->
+
+<!--                                  {% endfor %}-->
+                             </div>
+                                </div>
+                            </div>
+                            <!-- END Bootstrap Register -->
+                        </div>
+
+
+              </div>
+                <!-- END Page Content -->
+            </main>
+            <!-- END Main Container -->
+
+         {% include 'adminfooter.html' %}
+        </div>
+        <!-- END Page Container -->
+
+        <!-- Codebase Core JS -->
+         <script src="{% static 'adminassets/js/core/jquery.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/core/popper.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/core/bootstrap.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/core/jquery.slimscroll.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/core/jquery.scrollLock.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/core/jquery.appear.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/core/jquery.countTo.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/core/js.cookie.min.js' %}"></script>
+        <script src="{% static 'adminassets/js/codebase.js' %}"></script>
+    </body>
+</html>
+
+{%  ifequal error "no" %}
+<script>
+    alert('Record Saved Successfully');
+    window.location=('{% url 'donorlist' %}');
+</script>
+{%  endifequal %}
+
+{%  ifequal error "yes" %}
+<script>
+    alert('Something went wrong , Try Again');
+</script>
+{%  endifequal %}
+{% endblock %}

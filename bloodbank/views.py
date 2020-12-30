@@ -5,10 +5,11 @@ from .models import *
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from datetime import date
+from datetime import date, datetime
 from .forms import forms
 from django.core.mail import send_mail
 from BloodBankDjango.settings import EMAIL_HOST_USER
+from django.utils.dateparse import parse_date
 
 
 # Create your views here.
@@ -212,11 +213,15 @@ def add_donor(request):
         addr = request.POST['address']
         msg = request.POST['message']
         group1 = Group.objects.get(bloodgroup=bg)
-        bdate = date.today()
+        bdate=str(date.today())
+        dd = "--"
+        ed = "--"
+        status = "Not Approved"
         try:
             Donor.objects.create(fullname=fn, mobileno=con, emailid=eid,
                                  gender=g, age=a, group=group1,
-                                 address=addr, message=msg, postingdate=bdate)
+                                 address=addr, message=msg, postingdate=bdate, Status=status, donation_date=dd,
+                                 expiry_date=ed)
             error = "no"
         except:
             error = "yes"
@@ -314,11 +319,7 @@ def edit_hospital(request, pid):
     error = ""
 
     if request.method == "POST":
-        form = HospitalForm(request.POST)
-        # if form.is_valid():
-        #     form.save()
 
-        # context = {'form': form}
         hn = request.POST['HospitalName']
         cn = request.POST['ContactNo']
         lc = request.POST['Location']
@@ -330,7 +331,7 @@ def edit_hospital(request, pid):
         ABm = request.POST['ABminus']
         Op = request.POST['Oplus']
         Om = request.POST['Ominus']
-        # group11 = Group.objects.get(bloodgroup=BG)
+
 
         try:
 
@@ -509,11 +510,14 @@ def becomedonor(request):
         addr = request.POST['address']
         msg = request.POST['message']
         group1 = Group.objects.get(bloodgroup=bg)
-        bdate = date.today()
+        bdate = str(date.today())
+        dd="--"
+        ed="--"
+        status="Not Approved"
         try:
             Donor.objects.create(fullname=fn, mobileno=con, emailid=eid,
                                  gender=g, age=a, group=group1,
-                                 address=addr, message=msg, postingdate=bdate)
+                                 address=addr, message=msg, postingdate=bdate,Status=status,donation_date=dd,expiry_date=ed)
             error = "no"
         except:
             error = "yes"
@@ -534,3 +538,39 @@ def sendmail(request):
         except:
          error = "yes"
     return render(request, 'sendmail.html',{'error':error} )
+
+def edit_donor(request,pid):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    donor = Donor.objects.filter(id=pid)
+
+    error=""
+    if request.method == 'POST':
+        status = request.POST['Status']
+        dd = request.POST['donation_date']
+        ed = request.POST['expiry_date']
+        fn = request.POST['fullname']
+        con = request.POST['mobileno']
+        eid = request.POST['emailid']
+        a = request.POST['age']
+        g = request.POST['gender']
+        bg = request.POST['group']
+        addr = request.POST['address']
+        msg = request.POST['message']
+        bdate = request.POST['postingdate']
+
+        group1 = Group.objects.get(bloodgroup=bg)
+        try:
+
+         Donor.objects.create(fullname=fn, mobileno=con, emailid=eid, gender=g, age=a, group=group1, address=addr,
+                                 message=msg,postingdate=bdate,Status=status,donation_date=dd,expiry_date=ed)
+         error = "no"
+         donor.delete()
+        except:
+         error = "yes"
+
+
+    d = {'donor': donor,'error': error}
+
+    return render(request, 'edit_donor.html', d)
+
