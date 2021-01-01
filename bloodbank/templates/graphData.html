@@ -24,7 +24,6 @@
 <body>
 
 
-
         <div id="page-container" class="sidebar-o sidebar-inverse side-scroll page-header-fixed main-content-narrow">
 
             {% include 'sidebar.html' %}
@@ -34,9 +33,25 @@
             <main id="main-container">
                 <!-- Page Content -->
                 <div class="content">
-                    <h2 class="content-heading">Analytics and Alerts</h2>
+                    <center>
+                        <h1 class = 'alert alert-success'>Analytics and Alerts</h1></center>
+
+                    <h3 class="alert alert-info"> Expiry Alert (showing info from ALL Hospitals/Blood banks)</h3>
+
+                                        <ul>
+                                                {% for jj in expirystring|safeseq %}
+                                                    <li>{{ jj }}</li>
+                                                {% endfor %}
+                                        </ul>
+
+
+
+
+
+
                       <form method="post">
                         {% csrf_token %}
+                          <h3 class="alert alert-primary">Stock Infograph: {{names1}}</h3>
                     <select name="viewstats" id="viewstats" required="true">
 <!--                    <option disabled="true" selected><&#45;&#45;Select Hospital/Blood Bank&ndash;&gt;</option>-->
                         <option selected disabled="true" value="">-- Select Hospital/Blood Bank --</option>
@@ -46,9 +61,9 @@
                     </select>
 
                      <button name="viewS" value="ViewS" id="viewS" >View</button>
-                                          <div class="col-12">
-                                                 <th>{{names}}</th>
-                                            </div>
+<!--                                          <div class="col-12">-->
+<!--                                                 <th>{{names1}}</th>-->
+<!--                                            </div>-->
                     </form>
 
 
@@ -95,8 +110,10 @@
 
             </div>
                 </div>
-                 <div class="block-content">
-                            <h2 class="content-heading">Stock Info</h2>
+                 <div class="container">
+                             <h3 class="alert alert-danger">Stock Alerts: {{names1}}</h3>
+
+
 
                             <table border="1" class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
 
@@ -134,22 +151,12 @@
                                     </tr>
                             </table>
 
-
-                                          <h2 class="content-heading">Expiry Status</h2>
-
-                                        <ul>
-                                                {% for jj in expirystring|safeseq %}
-                                                    <li>{{ jj }}</li>
-                                                {% endfor %}
-                                        </ul>
+                                      </div>
 
 
 
 
-                                         </div>
 
-
-                 </div>
             </main>
         </div>
 

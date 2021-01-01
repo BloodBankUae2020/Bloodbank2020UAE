@@ -153,7 +153,16 @@
                                         <div class="form-group row">
                                              <label class="col-12" >Donation Hospital/BloodBank:</label>
                                             <div class="col-12">
-                                                <input type="text"  class="form-control" name="AssocHB"  value="{{i.AssocHB}}" required='true'>
+
+<!--                                                <input type="text"  class="form-control" name="AssocHB"  value="{{i.AssocHB}}" required='true'>-->
+                                                <select name="AssocHB" id="AssocHB" required="true">
+<!--                    <option disabled="true" selected><&#45;&#45;Select Hospital/Blood Bank&ndash;&gt;</option>-->
+                                                            <option selected disabled="true" value>{{i.AssocHB}}</option>
+                                                        {% for i in results %}
+                                                         <option value="{{i.HospitalName}}">{{i.HospitalName}}</option>
+                                                        {% endfor %}
+                                                </select>
+
                                             </div>
                                         </div>
 

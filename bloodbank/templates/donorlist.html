@@ -39,7 +39,7 @@
                                          <th class="d-none d-sm-table-cell">Expiry Date</th>
                                         <th class="d-none d-sm-table-cell">Donation Hospital/Bloodbank</th>
                                         <th class="d-none d-sm-table-cell">Bag Reference ID</th>
-                                        <th class="d-none d-sm-table-cell">Action</th>
+                                        <th>Action</th>
                                        </tr>
                                 </thead>
                                 <tbody>
@@ -59,9 +59,9 @@
                                         <td >{{i.expiry_date}}</td>
                                          <td >{{i.AssocHB}}</td>
                                          <td >{{i.ReferenceID}}</td>
-                                         <td class="d-none d-sm-table-cell"><a href="{% url 'delete_donor' i.id %}" onclick="return confirm('Do you really want to Delete ?');"><i class="fa fa-trash fa-delete" aria-hidden="true"></i></a></td>
-                                        <td class="d-none d-sm-table-cell"><a href="{% url 'view_donordetail' i.id %}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
-                                        <td class="d-none d-sm-table-cell"><a href="{% url 'edit_donor' i.id %}"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i></a></td>
+                                         <td><a href="{% url 'delete_donor' i.id %}" onclick="return confirm('Do you really want to Delete ?');"><i class="fa fa-trash fa-delete" aria-hidden="true"></i></a></td>
+                                        <td><a href="{% url 'view_donordetail' i.id %}"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                        <td><a href="{% url 'edit_donor' i.id %}"><i class="fa fa-pencil fa-fw" aria-hidden="true"></i></a></td>
                                     </tr>
 
                                     {% endfor %}

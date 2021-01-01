@@ -249,6 +249,7 @@ def graphData(request):
     if not request.user.is_authenticated:
         return redirect('login')
     hname=['Select Hospital']
+    hnames=""
     labels = ['A+','A-','B+','B-','AB+','AB-','O+','O-']
     stockinfo=['In Stock','In Stock','In Stock','In Stock','In Stock','In Stock','In Stock','In Stock']
     data = []
@@ -257,8 +258,11 @@ def graphData(request):
     expirystring=[]
     rids = Donor.objects.order_by('ReferenceID')
     for kk in rids:
+     try:
        if date.today()>=(datetime.strptime(kk.expiry_date, "%Y-%m-%d").date()):
-           expirystring.append(kk.ReferenceID + " Blood Bag Reference ID expired")
+           expirystring.append(kk.ReferenceID + " Blood Bag Reference ID expired" + " in " + kk.AssocHB)
+     except:
+         a=0
 
 
 
@@ -269,6 +273,7 @@ def graphData(request):
     if request.method== "POST":
        sd=request.POST['viewstats']
        hname = Hospital.objects.filter(HospitalName=sd).values_list('HospitalName', flat=True).first()
+       hnames = Hospital.objects.filter(HospitalName=sd).values_list('HospitalName', flat=True).first()
        Ap = Hospital.objects.filter(HospitalName=sd).values_list('Aplus', flat=True).first()
        Am = Hospital.objects.filter(HospitalName=sd).values_list('Aminus', flat=True).first()
        Bp = Hospital.objects.filter(HospitalName=sd).values_list('Bplus', flat=True).first()
@@ -304,7 +309,7 @@ def graphData(request):
 
     return render(request, 'graphData.html', {
         'labels': labels,
-        'data': data,'results': results, 'names': hname,'stocks':stockinfo,'expirystring':expirystring
+        'data': data,'results': results, 'names': hname,'stocks':stockinfo,'expirystring':expirystring,'names1':hnames
     })
 
 def delete_donor(request, pid):
@@ -555,7 +560,6 @@ def edit_donor(request,pid):
     if not request.user.is_authenticated:
         return redirect('login')
     donor = Donor.objects.filter(id=pid)
-    expirystring=""
 
     error=""
     results = Hospital.objects.all()
