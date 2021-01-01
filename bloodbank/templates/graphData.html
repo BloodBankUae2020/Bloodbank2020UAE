@@ -7,6 +7,7 @@
        <link rel="stylesheet" href="{% static 'adminassets/js/plugins/datatables/dataTables.bootstrap4.min.css' %}">
 
         <link rel="stylesheet" id="css-main" href="{% static 'adminassets/css/codebase.min.css' %}">
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous"></script>
 
@@ -20,6 +21,9 @@
 
 
     </head>
+<body>
+
+
 
         <div id="page-container" class="sidebar-o sidebar-inverse side-scroll page-header-fixed main-content-narrow">
 
@@ -124,15 +128,28 @@
                                         <th>O+</th>
                                          <td>{{stocks.6}} {{""}} ({{data.6}})</td>
                                     </tr>
-                                   <tr>
+                                    <tr>
                                          <th>O-</th>
                                          <td>{{stocks.7}} {{""}} ({{data.7}})</td>
                                     </tr>
-
                             </table>
 
-         </div>
 
+                                          <h2 class="content-heading">Expiry Status</h2>
+
+                                        <ul>
+                                                {% for jj in expirystring|safeseq %}
+                                                    <li>{{ jj }}</li>
+                                                {% endfor %}
+                                        </ul>
+
+
+
+
+                                         </div>
+
+
+                 </div>
             </main>
         </div>
 

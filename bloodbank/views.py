@@ -184,7 +184,7 @@ def add_hospital(request):
         ABm = request.POST['ABminus']
         Op = request.POST['Oplus']
         Om = request.POST['Ominus']
-        # group11 = Group.objects.get(bloodgroup=BG)
+
 
         try:
 
@@ -213,15 +213,17 @@ def add_donor(request):
         addr = request.POST['address']
         msg = request.POST['message']
         group1 = Group.objects.get(bloodgroup=bg)
-        bdate=str(date.today())
+        bdate=date.today()
         dd = "--"
         ed = "--"
         status = "Not Approved"
+        rid = "--"
+        ashs = "--"
         try:
             Donor.objects.create(fullname=fn, mobileno=con, emailid=eid,
                                  gender=g, age=a, group=group1,
                                  address=addr, message=msg, postingdate=bdate, Status=status, donation_date=dd,
-                                 expiry_date=ed)
+                                 expiry_date=ed,AssocHB=ashs, ReferenceID=rid)
             error = "no"
         except:
             error = "yes"
@@ -251,6 +253,17 @@ def graphData(request):
     stockinfo=['In Stock','In Stock','In Stock','In Stock','In Stock','In Stock','In Stock','In Stock']
     data = []
     data_int = []
+    expirydates=[]
+    expirystring=[]
+    rids = Donor.objects.order_by('ReferenceID')
+    for kk in rids:
+       if date.today()>=(datetime.strptime(kk.expiry_date, "%Y-%m-%d").date()):
+           expirystring.append(kk.ReferenceID + " Blood Bag Reference ID expired")
+
+
+
+
+
     # queryset = Hospital.objects.order_by('-Aplus')
     results= Hospital.objects.all()
     if request.method== "POST":
@@ -289,13 +302,9 @@ def graphData(request):
              for j in res:
                  stockinfo[j] = 'No stock'
 
-
-
-
-
     return render(request, 'graphData.html', {
         'labels': labels,
-        'data': data,'results': results, 'names': hname,'stocks':stockinfo,
+        'data': data,'results': results, 'names': hname,'stocks':stockinfo,'expirystring':expirystring
     })
 
 def delete_donor(request, pid):
@@ -514,10 +523,13 @@ def becomedonor(request):
         dd="--"
         ed="--"
         status="Not Approved"
+        RID = "--"
+        AsHos ="--"
         try:
             Donor.objects.create(fullname=fn, mobileno=con, emailid=eid,
                                  gender=g, age=a, group=group1,
-                                 address=addr, message=msg, postingdate=bdate,Status=status,donation_date=dd,expiry_date=ed)
+                                 address=addr, message=msg, postingdate=bdate, Status=status, donation_date=dd,
+                                 expiry_date=ed, AssocHB=AsHos, ReferenceID=RID)
             error = "no"
         except:
             error = "yes"
@@ -543,8 +555,10 @@ def edit_donor(request,pid):
     if not request.user.is_authenticated:
         return redirect('login')
     donor = Donor.objects.filter(id=pid)
+    expirystring=""
 
     error=""
+    results = Hospital.objects.all()
     if request.method == 'POST':
         status = request.POST['Status']
         dd = request.POST['donation_date']
@@ -558,19 +572,26 @@ def edit_donor(request,pid):
         addr = request.POST['address']
         msg = request.POST['message']
         bdate = request.POST['postingdate']
+        AsHos = request.POST['AssocHB']
+        RID= request.POST['ReferenceID']
+        expda=datetime.strptime(ed, "%Y-%m-%d").date()
+        if date.today() >= expda:
+            expirystring="BloodBag with Reference ID " + RID + " expires today"
+
 
         group1 = Group.objects.get(bloodgroup=bg)
         try:
+         Donor.objects.create(fullname=fn, mobileno=con, emailid=eid,
+                                 gender=g, age=a, group=group1,address=addr, message=msg, postingdate=bdate, Status=status, donation_date=dd,
+                                 expiry_date=ed, AssocHB=AsHos, ReferenceID=RID)
 
-         Donor.objects.create(fullname=fn, mobileno=con, emailid=eid, gender=g, age=a, group=group1, address=addr,
-                                 message=msg,postingdate=bdate,Status=status,donation_date=dd,expiry_date=ed)
          error = "no"
          donor.delete()
         except:
          error = "yes"
 
 
-    d = {'donor': donor,'error': error}
+    d = {'donor': donor,'error': error,'results':results}
 
     return render(request, 'edit_donor.html', d)
 

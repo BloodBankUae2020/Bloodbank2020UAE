@@ -3,15 +3,29 @@
 {% block body %}
  <html lang="en" class="no-focus"> <!--<![endif]-->
     <head>
- <title>Blood Bank Management - Edit Donor Status</title>
-<link rel="stylesheet" id="css-main" href="{% static 'adminassets/css/codebase.min.css' %}">
+         <title>Blood Bank Management - Edit Donor Status</title>
+        <link rel="stylesheet" href="{% static 'adminassets/js/plugins/datatables/dataTables.bootstrap4.min.css' %}">
+        <link rel="stylesheet" id="css-main" href="{% static 'adminassets/css/codebase.min.css' %}">
+
+<!--        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!--        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous"></script>-->
+
+<!--               <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous">-->
+
+<!--           <script>-->
+<!--             $(document).ready(function(){-->
+<!--             $('#selectbb').select2();-->
+<!--              });-->
+<!--           </script>-->
+
 
 </head>
+
     <body>
         <div id="page-container" class="sidebar-o sidebar-inverse side-scroll page-header-fixed main-content-narrow">
 
 
-              {% include 'sidebar.html' %}
+            {% include 'sidebar.html' %}
             {% include 'admin_nav.html' %}
             <!-- Main Container -->
             <main id="main-container">
@@ -36,6 +50,7 @@
 
 
                                     <form method="post">
+
                                        {% csrf_token %}
 
                                      {% for i in donor %}
@@ -107,7 +122,7 @@
                                           <div class="form-group row">
                                             <label class="col-12" >Resgistered Date:</label>
                                             <div class="col-12">
-                                                 <input type=text class="form-control" name="postingdate"  value= "{{i.postingdate}}" required='true'>
+                                                 <input type=date class="form-control" name="postingdate"  value= "{{i.postingdate}}" required='true'>
 
                                             </div>
                                         </div>
@@ -124,16 +139,32 @@
                                         <div class="form-group row">
                                             <label class="col-12" >Donation Date:</label>
                                             <div class="col-12">
-                                                 <input type="text" class="form-control" name="donation_date" value="{{i.donation_date}}" required='true'>
+                                                 <input type="date" class="form-control" name="donation_date" value="{{i.donation_date}}" required='true'>
                                             </div>
                                         </div>
 
                                         <div class="form-group row">
                                             <label class="col-12" >Expiry Date:</label>
                                             <div class="col-12">
-                                                 <input type="text"  class="form-control" name="expiry_date"  value="{{i.expiry_date}}" required='true'>
+                                                 <input type="date"  class="form-control" name="expiry_date"  value="{{i.expiry_date}}" required='true'>
                                             </div>
                                         </div>
+
+                                        <div class="form-group row">
+                                             <label class="col-12" >Donation Hospital/BloodBank:</label>
+                                            <div class="col-12">
+                                                <input type="text"  class="form-control" name="AssocHB"  value="{{i.AssocHB}}" required='true'>
+                                            </div>
+                                        </div>
+
+                                         <div class="form-group row">
+                                             <label class="col-12" >BloodBag Reference ID:</label>
+                                            <div class="col-12">
+                                                <input type="text"  class="form-control" name="ReferenceID"  value="{{i.ReferenceID}}" required='true'>
+                                            </div>
+                                        </div>
+
+
                                         <div class="form-group row">
                                             <div class="col-12">
                                                 <button type="submit" class="btn btn-alt-success" name="submit">
@@ -142,8 +173,11 @@
                                             </div>
                                          </div>
 
-                                    </form>
+
+                                      </form>
                                     {% endfor %}
+
+
 
 
 <!--                                 {% for i in donorstat %}-->

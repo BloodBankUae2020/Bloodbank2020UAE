@@ -23,9 +23,9 @@ class Donor(models.Model):
     postingdate = models.CharField(max_length=100)
     Status = models.CharField(max_length=100)
     donation_date = models.CharField(max_length=100)
-
     expiry_date = models.CharField(max_length=100)
-
+    AssocHB = models.CharField(max_length=100)
+    ReferenceID = models.CharField(max_length=100)
 
     def __str__(self):
         return self.fullname + " " + self.group.bloodgroup
