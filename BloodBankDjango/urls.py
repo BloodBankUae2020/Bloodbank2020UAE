@@ -57,5 +57,6 @@ urlpatterns = [
     path('betweendate_report',betweendate_report, name="betweendate_report"),
     path('sendmail',sendmail, name="sendmail"),
     path('edit_donor/<int:pid>',edit_donor, name="edit_donor"),
+    path('delete_queries(?P<int:pid>)',delete_queries,name='delete_queries'),
 
 ]

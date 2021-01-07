@@ -325,6 +325,14 @@ def delete_hospital(request, pid):
     hospital.delete()
     return redirect('hospitallist')
 
+
+def delete_queries(request, pid):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    contact = Contact.objects.get(id=pid)
+    contact.delete()
+    return redirect('read_queries')
+
 def edit_hospital(request, pid):
     if not request.user.is_authenticated:
         return redirect('login')
