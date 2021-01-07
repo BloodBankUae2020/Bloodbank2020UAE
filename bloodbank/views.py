@@ -60,10 +60,14 @@ def admin_home(request):
     if not request.user.is_authenticated:
         return redirect('login')
     donor = Donor.objects.all()
+    hospital = Hospital.objects.all()
     td = 0
+    th=0
 
     for i in donor:
         td += 1
+    for i in hospital:
+        th += 1
 
     contact = Contact.objects.all()
     tuq = 0
@@ -75,7 +79,7 @@ def admin_home(request):
         elif i.isread == "no":
             tuq += 1
 
-    d = {'td': td, 'tuq': tuq, 'trq': trq}
+    d = {'td': td, 'tuq': tuq, 'trq': trq,'th':th}
     return render(request, 'admin_home.html', d)
 
 
