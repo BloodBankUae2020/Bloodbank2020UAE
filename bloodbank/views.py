@@ -89,16 +89,15 @@ def changepassword(request):
         return redirect('login')
     error = ""
     if request.method == "POST":
-        o = request.POST['currentpassword']
         n = request.POST['newpassword']
         c = request.POST['confirmpassword']
         if c == n:
             u = User.objects.get(username__exact=request.user.username)
             u.set_password(n)
             u.save()
-            error = "yes"
-        else:
             error = "not"
+        else:
+            error = "yes"
     d = {'error': error}
     return render(request, 'changepassword.html', d)
 
