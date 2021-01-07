@@ -145,18 +145,18 @@
                                 <button type="submit" class="btn btn-primary" name="search1" id="submit1">Search Blood Groups</button>
                             </form>
                             {% ifequal terror "found" %}
-  <h4 align="center">Result against "{{ sd }}" keyword </h4>
+                             <h4 align="center">Result against "{{ sd }}" keyword </h4>
                             <table class="table table-bordered table-striped table-vcenter js-dataTable-full-pagination">
                                 <thead>
                                      <tr>
-                                             <th class="text-center"></th>
-                                        <th>Donor ID</th>
+                                         <th class="text-center"></th>
+
                                         <th class="d-none d-sm-table-cell">Full Name</th>
                                         <th class="d-none d-sm-table-cell">Mobile Number</th>
                                         <th class="d-none d-sm-table-cell">Email</th>
                                         <th class="d-none d-sm-table-cell">Blood Group</th>
                                          <th class="d-none d-sm-table-cell">Location</th>
-                                        <th class="d-none d-sm-table-cell">Posting Date</th>
+
 
                                        </tr>
                                 </thead>
@@ -164,15 +164,12 @@
                                    {% for i in donor %}
                                     <tr>
                                         <td class="text-center">{{forloop.counter}}</td>
-                                        <td class="font-w600">{{i.id}}</td>
                                         <td class="font-w600">{{i.fullname}}</td>
                                         <td class="font-w600">{{i.mobileno}}</td>
                                         <td class="font-w600">{{i.emailid}}</td>
                                         <td class="font-w600">{{i.group.bloodgroup}}</td>
                                          <td class="font-w600">{{i.address}}</td>
-                                        <td class="font-w600">
-                                            <span class="badge badge-primary">{{i.postingdate}}</span>
-                                        </td>    <td class="font-w600">{{i.group.bloodgroup}}</td>-->
+
 <!--                                         <td class="font-w600">{{i.address}}</td>-->
 <!--                                        <td class="font-w600">-->
 <!--                                            <span class="badge badge-primary">{{i.postingdate}}</span>-->
