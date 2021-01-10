@@ -48,8 +48,13 @@ $(document).ready(function() {
      <div class="container">
          <a href="#" ><img src="{%static 'images/SAflag.png' %}" style="position: relative; top:40px; ;left:-470px; width:160px; height:80px;"></a>
          <a href="#" ><img src="{%static 'images/logohead.jpg' %}" style="position: relative; top:40px; ;left:470px; width:160px; height:80px;"></a>
+          <div >
+             <h1 style = "color : white ; font-weight : bold ; font-size: 30 ">نظام ادارة المخزون لبنوك الدم الوطنية في المملكة العربية السعودية</h1>
+
+
+         </div>
          <div >
-             <a href="{% url 'home' %}"><h1 style = "color : white ; font-weight : bold">KSA    Blood Bank And Donor Management</h1></a>
+                 <h1 style = "color : white ; font-weight : bold ; font-size: 25 ">Inventory Management System for National Blood Banks in Saudi Arabia</h1>
 
 
          </div>
@@ -57,8 +62,7 @@ $(document).ready(function() {
              <ul>
              <li class="active"><a href="{% url 'home' %}"><span class="fas fa-home" aria-hidden="true"></span> Home</a></li>
              <li><a href="{% url 'about' %}"><span class="fas fa-user" aria-hidden="true"></span> About Us</a></li>
-             <li><a href="{% url 'blood_search' %}"><span class="far fa-calendar-alt" aria-hidden="true"></span> Search Blood</a></li>
-                 <li><a href="{% url 'becomedonor' %}"><span class="far fa-calendar-alt" aria-hidden="true"></span> Become A Donor</a></li>
+             <li><a href="{% url 'blood_search' %}"><span class="far fa-calendar-alt" aria-hidden="true"></span> Search Blood</a></li><li><a href="{% url 'becomedonor' %}"><span class="far fa-calendar-alt" aria-hidden="true"></span> Become A Donor</a></li>
              <li><a href="{% url 'contact' %}"><span class="fas fa-envelope" aria-hidden="true"></span> Contact</a></li>
              <li><a href="{% url 'login' %}"><span class="fas fa-user-cog" aria-hidden="true"></span> Admin</a></li>
              </ul>

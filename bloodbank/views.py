@@ -12,6 +12,7 @@ from BloodBankDjango.settings import EMAIL_HOST_USER
 from django.utils.dateparse import parse_date
 
 
+
 # Create your views here.
 
 def Home(request):
@@ -411,35 +412,120 @@ def blood_search(request):
     hospital = ""
     sd = ""
     donor =""
+    idd2=[]
+    nonzero=[]
     if request.method == "POST":
         if 'searchblood' in request.POST:
          sd = request.POST['searchblood']
          # check=request.POST.get
+
          try:
             if sd=="A+":
                 bg=1
+
+                shh = Hospital.objects.values_list('Aplus', flat=True)
+                shids = Hospital.objects.values_list('id', flat=True)
+                for kk in range(0, len(shh)):
+                  if shh[kk]!='0':
+                      nonzero.append(shids[kk])
+                for kl in range(0, len(nonzero)):
+                    oop=list(Hospital.objects.filter(id=nonzero[kl]).values_list('HospitalName', flat=True))
+                    ooq= ''.join(oop)
+                    idd2.append(ooq)
+
             elif sd=="A-":
                 bg=2
+                shh = Hospital.objects.values_list('Aminus', flat=True)
+                shids = Hospital.objects.values_list('id', flat=True)
+                for kk in range(0, len(shh)):
+                    if shh[kk] != '0':
+                        nonzero.append(shids[kk])
+                for kl in range(0, len(nonzero)):
+                    oop = list(Hospital.objects.filter(id=nonzero[kl]).values_list('HospitalName', flat=True))
+                    ooq = ''.join(oop)
+                    idd2.append(ooq)
             elif sd == "B+":
                 bg=3
+                shh = Hospital.objects.values_list('Bplus', flat=True)
+                shids = Hospital.objects.values_list('id', flat=True)
+                for kk in range(0, len(shh)):
+                    if shh[kk] != '0':
+                        nonzero.append(shids[kk])
+                for kl in range(0, len(nonzero)):
+                    oop = list(Hospital.objects.filter(id=nonzero[kl]).values_list('HospitalName', flat=True))
+                    ooq = ''.join(oop)
+                    idd2.append(ooq)
             elif sd == "B-":
                 bg=4
-            elif sd == "AB_":
+                shh = Hospital.objects.values_list('Bminus', flat=True)
+                shids = Hospital.objects.values_list('id', flat=True)
+                for kk in range(0, len(shh)):
+                    if shh[kk] != '0':
+                        nonzero.append(shids[kk])
+                for kl in range(0, len(nonzero)):
+                    oop = list(Hospital.objects.filter(id=nonzero[kl]).values_list('HospitalName', flat=True))
+                    ooq = ''.join(oop)
+                    idd2.append(ooq)
+            elif sd == "AB+":
                 bg=5
+                shh = Hospital.objects.values_list('ABplus', flat=True)
+                shids = Hospital.objects.values_list('id', flat=True)
+                for kk in range(0, len(shh)):
+                    if shh[kk] != '0':
+                        nonzero.append(shids[kk])
+                for kl in range(0, len(nonzero)):
+                    oop = list(Hospital.objects.filter(id=nonzero[kl]).values_list('HospitalName', flat=True))
+                    ooq = ''.join(oop)
+                    idd2.append(ooq)
             elif sd == "AB-":
                 bg=6
+                shh = Hospital.objects.values_list('ABminus', flat=True)
+                shids = Hospital.objects.values_list('id', flat=True)
+                for kk in range(0, len(shh)):
+                    if shh[kk] != '0':
+                        nonzero.append(shids[kk])
+                for kl in range(0, len(nonzero)):
+                    oop = list(Hospital.objects.filter(id=nonzero[kl]).values_list('HospitalName', flat=True))
+                    ooq = ''.join(oop)
+                    idd2.append(ooq)
             elif sd == "O+":
                 bg=7
+                shh = Hospital.objects.values_list('Oplus', flat=True)
+                shids = Hospital.objects.values_list('id', flat=True)
+                for kk in range(0, len(shh)):
+                    if shh[kk] != '0':
+                        nonzero.append(shids[kk])
+                for kl in range(0, len(nonzero)):
+                    oop = list(Hospital.objects.filter(id=nonzero[kl]).values_list('HospitalName', flat=True))
+                    ooq = ''.join(oop)
+                    idd2.append(ooq)
             elif sd== "O-":
                 bg=8
+                shh = Hospital.objects.values_list('Ominus', flat=True)
+                shids = Hospital.objects.values_list('id', flat=True)
+                for kk in range(0, len(shh)):
+                    if shh[kk] != '0':
+                        nonzero.append(shids[kk])
+                for kl in range(0, len(nonzero)):
+                    oop = list(Hospital.objects.filter(id=nonzero[kl]).values_list('HospitalName', flat=True))
+                    ooq = ''.join(oop)
+                    idd2.append(ooq)
             else:
                 bg=0
-
-            # hospital = Hospital.objects.filter((Q(HospitalName=sd) | Q(Location=sd) | Q(id=sd)))
-            idd = Hospital.objects.filter(Location=sd).values_list('Location', flat=True).first()
-            idd1 = Hospital.objects.filter(HospitalName=sd).values_list('HospitalName', flat=True).first()
-            hospital = Hospital.objects.filter(Q(Location=idd) | Q(HospitalName=idd1))
-            terror = "found"
+            if bg==0:
+             # hospital = Hospital.objects.filter((Q(HospitalName=sd) | Q(Location=sd) | Q(id=sd)))
+                idd = Hospital.objects.filter(Location=sd).values_list('Location', flat=True).first()
+                idd1 = Hospital.objects.filter(HospitalName=sd).values_list('HospitalName', flat=True).first()
+                hospital = Hospital.objects.filter(Q(Location=idd) | Q(HospitalName=idd1))
+                terror = "found"
+            else:
+                for hh in range(0,len(idd2)):
+                 hos = Hospital.objects.filter(Q(HospitalName=idd2[hh]))
+                 if hh!=0:
+                     hospital = hospital | hos
+                 else:
+                     hospital=hos
+                terror = "found"
 
          except:
             terror = "notfound"
